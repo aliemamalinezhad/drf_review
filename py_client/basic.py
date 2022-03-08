@@ -4,7 +4,7 @@ import json
 endpoint = "http://localhost:8000/api/"
 
 
-get_response = requests.get(endpoint, json={"query": "Hello World"})
+get_response = requests.post(endpoint, json={"title": "Hello World"})
 
 
 

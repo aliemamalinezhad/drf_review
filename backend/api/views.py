@@ -6,15 +6,13 @@ from products.models import Product
 from products.serializers import ProductSerializer
 
 
-@api_view(["GET"])
+@api_view(["POST"])
 def api_home(request, *args, **kwargs):
 
-    
-    instanse = Product.objects.all().order_by('?').first()
-    data = {}
-    if instanse:
-        data = ProductSerializer(instanse).data
-
-    return Response(data)
+    serializer = ProductSerializer(data = request.data)
+    if serializer.is_valid():
+        # instanse = serializer.save()
+        print(serializer.data)
+        return Response(serializer.data)
     
  
