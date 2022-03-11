@@ -32,6 +32,8 @@ product_list_view = ProductListCreateApiView.as_view()
 class ProductDetailApiView(generics.RetrieveAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+    permission_classes = [permissions.IsAdminUser ,IsStaffEditorPermission]
+
 
 
 product_detail_view = ProductDetailApiView.as_view()
@@ -41,6 +43,8 @@ class ProductUpdateApiView(generics.UpdateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     lookup_field = 'pk'
+    permission_classes = [permissions.IsAdminUser ,IsStaffEditorPermission]
+
 
     def perform_update(self, serializer):
         instance = serializer.save()
@@ -51,6 +55,7 @@ class ProductUpdateApiView(generics.UpdateAPIView):
 class ProductDeleteApiView(generics.DestroyAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+    permission_classes = [permissions.IsAdminUser ,IsStaffEditorPermission]
 
     def perform_destroy(self, instance):
         super().perform_destroy(instance)
